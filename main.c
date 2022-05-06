@@ -12,6 +12,7 @@ typedef struct chaine
 	struct chaine *prev;
 	struct chaine *next;
 } chaine;
+//entrer une chaine
 void saisie(chaine **head,char c)
 {
 	chaine *b = (chaine *)malloc(sizeof(chaine));
@@ -25,6 +26,7 @@ void saisie(chaine **head,char c)
 
 	} else printf("creation imposi");
 }
+//affichage d'une chaine :
 void affichage(chaine *head)
 {
 	chaine *temp = head->next;
@@ -32,17 +34,24 @@ void affichage(chaine *head)
 	gotoxy(37,16);printf("Votre Chaine de caractere : ");
 	while(temp != head)
 	{
-		 gotoxy(28,15);printf("���������������������������������������������������������������������������������������������������������������������������������������������Ŀ");
-		 gotoxy(28,16);printf("�");gotoxy(100,16);printf("\t\t\t\t\t\t\t\t\t  �");
+		 gotoxy(28,15);printf("ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿");
+		 gotoxy(28,16);printf("³");gotoxy(100,16);printf("\t\t\t\t\t\t\t\t\t  ³");
 		 gotoxy(70+i,16);printf("%c",temp->data);
-		 gotoxy(28,17);printf("�����������������������������������������������������������������������������������������������������������������������������������������������");
+		 gotoxy(28,17);printf("ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ");
 		 temp = temp->next;
 		 i++;
 	}
 }
+//copie d'une chaine dans une autre
 void Copie(chaine **head,chaine **head2)
 {
-   	*head = *head2;
+    chaine *temp = (*head)->next;
+    chaine *temp2 = (*head2)->next;
+    while(temp2 != *head2)
+    {
+        saisie(head,temp2->data);
+        temp2 = temp2->next;
+    }
 }
 int longueurChaine(chaine *head)
 {
@@ -58,6 +67,7 @@ int longueurChaine(chaine *head)
 		 return c;
 	 } else return 0;
 }
+//concatenation de deux chaines :
 chaine* concatenationChaine(chaine **head1,chaine **head2)
 {
    chaine *head3 = (chaine *)malloc(sizeof(chaine));
@@ -90,7 +100,7 @@ chaine* concatenationChaine(chaine **head1,chaine **head2)
    return head3;
 }
 //inversion :
-chaine *inversion(chaine *head)
+/*chaine *invertion(chaine *head)
 {
 	 chaine *temp = (head)->prev;
 	 chaine *temp2;
@@ -111,7 +121,7 @@ chaine *inversion(chaine *head)
 	 	temp2 = temp2->next;
 	 }
 	 return head;
-}
+}*/
 //chaine en miniscule et majiscule :
 void invertionCasse(chaine **head)
 {
@@ -139,7 +149,7 @@ void invertionCasse(chaine **head)
 		 }
 	}
 }
-//syppression des occurences d'un caract�re:
+//syppression des occurences d'un caractère:
 void suppression(chaine **head,char caractere)
 {
 	chaine *temp = (*head)->next;
@@ -160,6 +170,7 @@ void suppression(chaine **head,char caractere)
 		}
 	}
 }
+//chaine de consonne :
 chaine* Consonne(chaine **head)
 {
    chaine *conso = (chaine *)malloc(sizeof(chaine));
@@ -182,6 +193,7 @@ chaine* Consonne(chaine **head)
 	   return conso;
    } else return NULL;
 }
+//insertion d'une chaine dans une autre
 void insertion(chaine **head)
 {
 	 int position;
@@ -241,6 +253,7 @@ void insertion(chaine **head)
          }
      }
 }
+//comparaison de deux chaines
 int Comparaison(chaine *head,chaine *head2)
 {
 	chaine *temp = (head)->next;
@@ -278,7 +291,7 @@ int main()
 	chaine *headCo = (chaine *)malloc(sizeof(chaine));
 	chaine *head2 = (chaine *)malloc(sizeof(chaine));
 	chaine *head3 = (chaine *)malloc(sizeof(chaine));
-	chaine *head4 = (chaine *)malloc(sizeof(chaine));
+	chaine *head4 = NULL;
 	char data[256];
 	char data2[256];
 	char data3[256];
@@ -320,9 +333,9 @@ int main()
                         color(7);
                         if(head->next != head && head->prev !=head)
                         {
-                            gotoxy(28,15);printf("���������������������������������������������������������������������������������������������������������������������������������������������Ŀ");
-                             gotoxy(28,16);printf("�");gotoxy(30,16);printf("\t\tla longueur de votre chaine de caractere est : %d",longueurChaine(head));gotoxy(100,16);printf("\t\t\t\t\t\t\t\t\t  �");
-                             gotoxy(28,17);printf("�����������������������������������������������������������������������������������������������������������������������������������������������");
+                            gotoxy(28,15);printf("ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿");
+                             gotoxy(28,16);printf("³");gotoxy(30,16);printf("\t\tla longueur de votre chaine de caractere est : %d",longueurChaine(head));gotoxy(100,16);printf("\t\t\t\t\t\t\t\t\t  ³");
+                             gotoxy(28,17);printf("ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ");
                         } else
                         {
                             gotoxy(28,16);printf("Veuillez Creer une chaine de caractere");
