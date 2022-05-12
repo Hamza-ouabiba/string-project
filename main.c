@@ -23,8 +23,7 @@ void saisie(chaine **head,char c)
 		b->prev = (*head)->prev;
 		b->prev->next = b;
 		(*head)->prev = b;
-
-	} else printf("creation imposi");
+	} else printf("creation impossible");
 }
 //affichage d'une chaine :
 void affichage(chaine *head)
@@ -34,20 +33,20 @@ void affichage(chaine *head)
 	gotoxy(37,16);printf("Votre Chaine de caractere : ");
 	while(temp != head)
 	{
-		 gotoxy(28,15);printf("ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿");
-		 gotoxy(28,16);printf("³");gotoxy(100,16);printf("\t\t\t\t\t\t\t\t\t  ³");
+         gotoxy(28,15);printf("\xDA\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xbf");
+		 gotoxy(28,16);printf("\xb3");gotoxy(100,16);printf("\t\t\t\t\t  \xb3");
 		 gotoxy(70+i,16);printf("%c",temp->data);
-		 gotoxy(28,17);printf("ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ");
+         gotoxy(28,17);printf("\xc0\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xd9");
 		 temp = temp->next;
 		 i++;
 	}
 }
 //copie d'une chaine dans une autre
-void Copie(chaine **head,chaine **head2)
+void Copie(chaine **head,chaine *head2)
 {
     chaine *temp = (*head)->next;
-    chaine *temp2 = (*head2)->next;
-    while(temp2 != *head2)
+    chaine *temp2 = (head2)->next;
+    while(temp2 != head2)
     {
         saisie(head,temp2->data);
         temp2 = temp2->next;
@@ -149,7 +148,7 @@ void invertionCasse(chaine **head)
 		 }
 	}
 }
-//syppression des occurences d'un caractère:
+//syppression des occurences d'un caract�re:
 void suppression(chaine **head,char caractere)
 {
 	chaine *temp = (*head)->next;
@@ -162,12 +161,14 @@ void suppression(chaine **head,char caractere)
 		{
 			 if(caractere == tolower(temp->data))
 			 {
+
 				 temp->prev->next = temp->next;
 				 temp->next->prev = temp->prev;
 				 free(temp);
 			 }
 			 temp = temp->next;
 		}
+
 	}
 }
 //chaine de consonne :
@@ -193,71 +194,90 @@ chaine* Consonne(chaine **head)
 	   return conso;
    } else return NULL;
 }
+
 //insertion d'une chaine dans une autre
-void insertion(chaine **head)
+chaine * insertion(chaine *head,chaine *head2)
 {
 	 int position;
-	 chaine *temp = (*head)->next;
+	 chaine *temp = (head)->next;
+	 chaine *temp2 = (head2)->prev;
 	 chaine *b;
-	 char *data;
 	 int i = 0;
 	 int j;
 	 int flag = 0;
-	 data = (char *)malloc(sizeof(char));
-	 gotoxy(28,10);printf("Donner une chaine : ");
-	 fflush(stdin);
-	 gets(data);
 	 gotoxy(28,14);printf("Donner une position : ");
 	 scanf("%d",&position);
      if(position == 1)
      {
-         for(j=strlen(data)-1;j>=0;j--)
+
+         while(temp2 != head2)
          {
-             b = (chaine *)malloc(sizeof(chaine));
-             b->data = data[j];
-             b->next = (*head)->next;
-             b->prev = (*head);
-             (*head)->next->prev = b;
-             (*head)->next = b;
+              b = (chaine *)malloc(sizeof(chaine));
+             b->data = temp2->data;
+             b->next = (head)->next;
+             b->prev = (head);
+             (head)->next->prev = b;
+             (head)->next = b;
+             temp2 = temp2->prev;
          }
-         return;
+         return head;
      } else
      {
-         while(temp != *head)
+         while(temp != head)
          {
             i++;
-            if(i == position)
+            if(i == position-1)
             {
-               for(j=strlen(data)-1;j>=0;j--)
+                while(temp2 != head2)
                 {
-                     b = (chaine *)malloc(sizeof(chaine));
-                     b->data = data[j];
-                     b->next = temp->next;
-                     b->prev = temp;
-                     temp->next->prev = b;
-                     temp->next = b;
+                    b = (chaine *)malloc(sizeof(chaine));
+                    b->data = temp2->data;
+                    b->next = temp->next;
+                    b->prev = temp;
+                    temp->next->prev = b;
+                    temp->next = b;
+                    temp2 = temp2->prev;
                 }
                 flag = 1;
                 break;
             } else
             {
-                 temp = temp->next;
+                temp = temp->next;
             }
          }
          if(flag == 1)
          {
-             return;
-         } else
-         {
-             gotoxy(28,30);printf("Position Introuvable");
+             return head;
          }
      }
 }
 //comparaison de deux chaines
-int Comparaison(chaine *head,chaine *head2)
+int Comparaison(chaine *head,chaine *head2,char *c1,char *c2)
 {
 	chaine *temp = (head)->next;
 	chaine *temp2 =(head2)->next;
+	int i;
+	//copier les chaines :
+	for(i=0;i<longueurChaine(head);i++)
+	{
+        while(temp != head)
+        {
+            c1[i] = temp->data;
+            temp = temp->next;
+            break;
+        }
+	}
+	for(i=0;i<longueurChaine(head2);i++)
+    {
+        while(temp2 != head2)
+        {
+            c2[i] = temp2->data;
+            temp2 = temp2->next;
+            break;
+        }
+    }
+    temp = (head)->next;
+	temp2 =(head2)->next;
 	if(longueurChaine(head) == longueurChaine(head2))
     {
         while(temp!=head)
@@ -295,11 +315,14 @@ int main()
 	char data[256];
 	char data2[256];
 	char data3[256];
+	char data4[256];
 	char lettre;
 	int  choix;
 	int i;
 	FullScreen();
     intro();
+    head3->next = head3;
+    head3->prev = head3;
     head2->next = head2;
     head2->prev = head2;
     head->next = head;
@@ -324,8 +347,19 @@ int main()
                          {
                              saisie(&head,data[i]);
                          }
-                        affichage(head);
-
+                         affichage(head);
+                         getch();
+                         system("cls");
+                         head3->next = head3;
+                         head3->prev = head3;
+                         gotoxy(28,10);printf("Donner une deuxieme chaine a manipuler ! ");
+                         fflush(stdin);
+                         gets(data4);
+                         for(i=0;i<strlen(data4);i++)
+                         {
+                             saisie(&head3,data4[i]);
+                         }
+                         affichage(head3);
                  } break;
                  case  2:
                     {
@@ -333,9 +367,14 @@ int main()
                         color(7);
                         if(head->next != head && head->prev !=head)
                         {
-                            gotoxy(28,15);printf("ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿");
-                             gotoxy(28,16);printf("³");gotoxy(30,16);printf("\t\tla longueur de votre chaine de caractere est : %d",longueurChaine(head));gotoxy(100,16);printf("\t\t\t\t\t\t\t\t\t  ³");
-                             gotoxy(28,17);printf("ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ");
+                            gotoxy(28,15);printf("\xDA\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xbf");
+                            gotoxy(28,16);printf("\xb3");gotoxy(30,16);printf("\t\tla longueur de premiere chaine de caractere est : %d",longueurChaine(head));gotoxy(100,16);printf("\t\t\t\t\t  \xb3");
+                            gotoxy(28,17);printf("\xc0\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xd9");
+                            getch();
+                            system("cls");
+                            gotoxy(28,15);printf("\xDA\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xbf");
+                            gotoxy(28,16);printf("\xb3");gotoxy(30,16);printf("\t\tla longueur de deuxieme chaine de caractere est : %d",longueurChaine(head3));gotoxy(100,16);printf("\t\t\t\t\t  \xb3");
+                            gotoxy(28,17);printf("\xc0\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xC4\xd9");
                         } else
                         {
                             gotoxy(28,16);printf("Veuillez Creer une chaine de caractere");
@@ -346,7 +385,7 @@ int main()
                         system("cls");
                         if(head->next != head && head->prev != head)
                         {
-                            Copie(&head2,&head);
+                            Copie(&head2,head3);
                             gotoxy(28,10);printf("Chaine de caractere copier ");
                             affichage(head2);
                         } else
@@ -358,20 +397,12 @@ int main()
                  case 4:
                     {
                         system("cls");
-                        head3->next = head3;
-                        head3->prev = head3;
+
                         //concatenation de deux chaines :
                         if(head->next != head && head->prev != head)
                         {
-                            gotoxy(28,10);printf("Donner une chaine a concatener : ");
-                            fflush(stdin);
-                            gets(data2);
-                            for(i=0;i<strlen(data2);i++)
-                            {
-                                saisie(&head3,data2[i]);
-                            }
-                            head4 = concatenationChaine(&head,&head3);
-                            affichage(head4);
+                            headCo = concatenationChaine(&head,&head3);
+                            affichage(headCo);
                         } else
                         {
                             gotoxy(28,16);printf("Veuillez Creer une chaine de caractere");
@@ -381,22 +412,21 @@ int main()
                  case 5:
                     {
                         system("cls");
-                        if(head->prev != head && head->next != head)
+                        if(head3->prev != head3 && head3->next != head3)
                         {
-                            invertionCasse(&head);
-                            affichage(head);
+                            invertionCasse(&head3);
+                            affichage(head3);
                         } else
                         {
                             gotoxy(28,16);printf("Veuillez Creer une chaine de caractere");
                         }
-
                     } break;
                  case 6:
                     {
                          system("cls");
                         if(head->next != head && head->prev)
                         {
-                            insertion(&head);
+                            head = insertion(head,head3);
                             affichage(head);
                         } else
                         {
@@ -406,17 +436,17 @@ int main()
                  case 7:
                     {
                         system("cls");
-                            if(head->next != head && head->prev != head)
+                            if(head3->next != head3 && head3->prev != head3)
                             {
                                 gotoxy(28,10);printf("Donner un caractere : ");
                                 fflush(stdin);
                                 scanf("%c",&lettre);
-                                suppression(&head,lettre);
+                                suppression(&head,tolower(lettre));
                                 affichage(head);
-                                } else
-                                {
-                                    gotoxy(28,16);printf("Veuillez Creer une chaine de caractere");
-                                }
+                            } else
+                            {
+                                gotoxy(28,16);printf("Veuillez Creer une chaine de caractere");
+                            }
                    } break;
                 case 8:
                 {
@@ -435,24 +465,15 @@ int main()
                         system("cls");
                         if(head->next != head && head->prev != head)
                         {
-                            headCo->next = headCo;
-                            headCo->prev = headCo;
-                            gotoxy(28,10);printf("Donner une chaine a comparer avec la chaine initiale : ");
-                            fflush(stdin);
-                            gets(data3);
-                            for(i=0;i<strlen(data3);i++)
+                            if(Comparaison(head,head3,data,data4) == 0)
                             {
-                                saisie(&headCo,data3[i]);
-                            }
-                            if(Comparaison(head,headCo) == 0)
+                                gotoxy(28,16);printf("les deux chaines sont egaux %s = %s",data,data4);
+                            } else if(Comparaison(head,head3,data,data4) == -1)
                             {
-                                gotoxy(28,16);printf("les deux chaines sont egaux %s = %s",data,data3);
-                            } else if(Comparaison(head,headCo) == -1)
-                            {
-                                gotoxy(28,16);printf("la Premiere chaine %s est plus petite que la deuxieme chaine %s",data,data3);
+                                gotoxy(28,16);printf("la Premiere chaine %s est plus petite que la deuxieme chaine %s",data,data4);
                             } else
                             {
-                                gotoxy(28,16);printf("la premiere chaine %s est plus grande que la deuxieme chaine %s",data,data3);
+                                gotoxy(28,16);printf("la premiere chaine %s est plus grande que la deuxieme chaine %s",data,data4);
                             }
                         } else
                         {
@@ -465,6 +486,9 @@ int main()
                             if(head->next != head && head->prev != head)
                             {
                                 affichage(head);
+                                getch();
+                                system("cls");
+                                affichage(head3);
                             } else
                             {
                                 gotoxy(28,16);printf("Veuillez Creer une chaine de caractere");
@@ -479,5 +503,6 @@ int main()
           getch();
          } while( choix!=  0);
 	} else printf("Creation Impossible");
-	         return 0;
+    return 0;
 }
+
