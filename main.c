@@ -383,10 +383,12 @@ int main()
                  case 3:
                     {
                         system("cls");
+                        head2->next = head2;
+                        head2->prev = head2;
                         if(head->next != head && head->prev != head)
                         {
                             Copie(&head2,head3);
-                            gotoxy(28,10);printf("Chaine de caractere copier ");
+                            gotoxy(28,10);printf("Chaine de caractere Copier ");
                             affichage(head2);
                         } else
                         {
