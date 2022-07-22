@@ -5,7 +5,7 @@
 #include<ctype.h>
 #include<windows.h>
 #include<time.h>
-#include"Liste_circulaire.h"
+#include"console.h"
 typedef struct chaine
 {
 	char data;
